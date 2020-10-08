@@ -75,18 +75,24 @@ const CardDisplayModal = (props) => {
                 value={title}
                 onChange={({ target }) => props.modTitle(target.value)}
               />
-              : data.title}
+              : <strong>{data.title}</strong>}
           </div>
         </Modal.Header>
         <Modal.Body>
           <div onClick={enableDescMod}>
-            {modifyDesc || data.description === ''
-              ? <textarea
-                value={description}
-                onChange={({ target }) => props.modDesc(target.value)}
-                style={{ width: '80%', height: '5rem' }}
-              />
-              : data.description}
+            <div>
+              <p><strong>Description:</strong></p>
+
+              {
+                modifyDesc || data.description === ''
+                  ? <textarea
+                    value={description}
+                    onChange={({ target }) => props.modDesc(target.value)}
+                    style={{ width: '80%', height: '5rem' }}
+                  />
+                  : <p>{data.description}</p>
+              }
+            </div>
           </div>
         </Modal.Body>
         <Modal.Footer>
