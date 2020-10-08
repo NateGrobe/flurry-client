@@ -13,7 +13,8 @@ const NewDeckModal = (props) => {
     hide();
   }
 
-  function addDeck() {
+  function addDeck(event) {
+    event.preventDefault();
     const deck = {
       title: newDeck
     };
