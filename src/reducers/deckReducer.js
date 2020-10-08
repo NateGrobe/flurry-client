@@ -17,6 +17,12 @@ const deckReducer = (state = [], action) => {
       changedDeck.cards = changedDeck.cards.filter(card => card.id !== cardId);
       return state.map(deck => deck.id ===  deckId ? changedDeck : deck);
     }
+    case 'MOD_CARD': {
+      const { cardId, deckId, changedCard } = action;
+      const changedDeck = state.find(d => d.id === deckId);
+      changedDeck.cards = changedDeck.cards.map(card => card.id === cardId ? changedCard : card);
+      return state.map(deck => deck.id === deckId ? changedDeck : deck);
+    }
     default:
       return state;
   }
@@ -48,6 +54,18 @@ export function removeCardFromDeck(cardId, deckId) {
     await cardServices.removeCard(cardId);
     dispatch({
       type: 'REMOVE_CARD_FROM_DECK',
+      cardId,
+      deckId
+    });
+  };
+}
+
+export function modCard(changedCard, cardId, deckId) {
+  return async dispatch => {
+    // call api put statement
+    dispatch({
+      type: 'MOD_CARD',
+      changedCard,
       cardId,
       deckId
     });
