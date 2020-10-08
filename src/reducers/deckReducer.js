@@ -9,6 +9,9 @@ const deckReducer = (state = [], action) => {
     case 'ADD_NEW_DECK':
       return [...state, action.newDeck];
 
+    case 'REMOVE_DECK':
+      return state.filter(deck => deck.id !== action.deckId);
+
     case 'ADD_CARD_TO_DECK': {
       const { deckId, newCard } = action;
       const changedDeck = state.find(d => d.id === deckId);
@@ -51,6 +54,16 @@ export function addNewDeck(deck) {
     dispatch({
       type: 'ADD_NEW_DECK',
       newDeck
+    });
+  };
+}
+
+export function removeDeck(deckId) {
+  return async dispatch => {
+    await deckServices.deleteDeck(deckId);
+    dispatch({
+      type: 'REMOVE_DECK',
+      deckId
     });
   };
 }

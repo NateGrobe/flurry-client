@@ -11,7 +11,12 @@ async function addDeck(obj) {
   return res.data;
 }
 
+async function deleteDeck(id) {
+  return await axios.delete(`${baseUrl}/${id}`);
+}
+
 export default {
   getAll,
   addDeck,
+  deleteDeck,
 };

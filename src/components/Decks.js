@@ -6,6 +6,8 @@ import Deck from './Deck';
 import NewDeckModal from './NewDeckModal';
 import './styles.css';
 
+import { removeDeck } from '../reducers/deckReducer';
+
 const Decks = (props) => {
   const [bIsHovered, setBIsHovered] = useState(false);
   const [showNewDeckModal, setShowNewDeckModal] = useState(false);
@@ -17,6 +19,13 @@ const Decks = (props) => {
     backgroundColor: bIsHovered ? '#08d2f1' : '#04c2e0',
   };
 
+  function handleRemoveDeck(deckId) {
+    const deckTitle = props.decks.find(deck => deck.id === deckId).title;
+    if (window.confirm(`Delete ${deckTitle} and all its cards?`)) {
+      props.removeDeck(deckId);
+    }
+  }
+
   return (
     <CardDeck as='div'>
       {props.decks.map(deck =>
@@ -25,6 +34,7 @@ const Decks = (props) => {
           cards={deck.cards}
           header={deck.title}
           deckId={deck.id}
+          delDeck={handleRemoveDeck}
         />
       )}
       <Button
@@ -47,7 +57,11 @@ const mapStateToProps = state => {
   };
 };
 
+const mapDispatchToProps = {
+  removeDeck
+};
+
 export default connect(
   mapStateToProps,
-  null
+  mapDispatchToProps
 )(Decks);
