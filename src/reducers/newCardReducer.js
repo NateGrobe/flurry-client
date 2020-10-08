@@ -18,7 +18,7 @@ const newCardReducer = (state = initialState, action) => {
   }
 };
 
-export function updateTitle(title) {
+export function updateCardTitle(title) {
   return dispatch => {
     dispatch({
       type: 'CARD_TITLE',
@@ -28,7 +28,7 @@ export function updateTitle(title) {
 }
 
 
-export function updateDescription(desc) {
+export function updateCardDescription(desc) {
   return dispatch => {
     dispatch({
       type: 'CARD_DESC',

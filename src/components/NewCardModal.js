@@ -4,8 +4,8 @@ import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 
 import {
-  updateTitle,
-  updateDescription,
+  updateCardTitle,
+  updateCardDescription,
   clearCardForm
 } from '../reducers/newCardReducer';
 
@@ -44,14 +44,14 @@ const NewCardModal = (props) => {
           <input
             value={title}
             placeholder='Enter a title...'
-            onChange={({ target }) => props.updateTitle(target.value)}
+            onChange={({ target }) => props.updateCardTitle(target.value)}
           />
           <br/>
           <br/>
           <textarea
             value={description}
             placeholder='Description...'
-            onChange={({ target }) => props.updateDescription(target.value)}
+            onChange={({ target }) => props.updateCardDescription(target.value)}
             style={{ width: '80%', height: '5rem' }}
           />
         </Modal.Body>
@@ -73,8 +73,8 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = {
-  updateTitle,
-  updateDescription,
+  updateCardTitle,
+  updateCardDescription,
   clearCardForm,
   addCardToDeck
 };
