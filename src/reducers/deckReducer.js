@@ -5,24 +5,31 @@ const deckReducer = (state = [], action) => {
   switch(action.type) {
     case 'INIT_DECKS':
       return action.content;
+
+    case 'ADD_NEW_DECK':
+      return [...state, action.newDeck];
+
     case 'ADD_CARD_TO_DECK': {
       const { deckId, newCard } = action;
       const changedDeck = state.find(d => d.id === deckId);
       changedDeck.cards.push(newCard);
       return state.map(deck => deck.id ===  deckId ? changedDeck : deck);
     }
+
     case 'REMOVE_CARD_FROM_DECK': {
       const { cardId, deckId } = action;
       const changedDeck = state.find(d => d.id === deckId);
       changedDeck.cards = changedDeck.cards.filter(card => card.id !== cardId);
       return state.map(deck => deck.id ===  deckId ? changedDeck : deck);
     }
+
     case 'MOD_CARD': {
       const { cardId, deckId, changedCard } = action;
       const changedDeck = state.find(d => d.id === deckId);
       changedDeck.cards = changedDeck.cards.map(card => card.id === cardId ? changedCard : card);
       return state.map(deck => deck.id === deckId ? changedDeck : deck);
     }
+
     default:
       return state;
   }
@@ -34,6 +41,16 @@ export function initializeDecks() {
     dispatch({
       type: 'INIT_DECKS',
       content
+    });
+  };
+}
+
+export function addNewDeck(deck) {
+  return async dispatch => {
+    const newDeck = await deckServices.addDeck(deck);
+    dispatch({
+      type: 'ADD_NEW_DECK',
+      newDeck
     });
   };
 }

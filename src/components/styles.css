@@ -6,3 +6,16 @@
     width: 100%;
     margin-left: auto;
 }
+
+#add-deck-button {
+    height: 35px;
+    width: 13rem;
+    background-color: #04C2E0;
+    border: none;
+    text-align: left;
+}
+
+#add-deck-button :hover {
+    /* background-color: #08D2F1; */
+    background-color: red;
+}

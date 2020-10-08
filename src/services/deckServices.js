@@ -6,6 +6,12 @@ async function getAll() {
   return res.data;
 }
 
+async function addDeck(obj) {
+  const res = await axios.post(baseUrl, obj);
+  return res.data;
+}
+
 export default {
   getAll,
+  addDeck,
 };
