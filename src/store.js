@@ -4,10 +4,12 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 
 import deckReducer from './reducers/deckReducer';
 import newCardReducer from './reducers/newCardReducer';
+import cardModReducer from './reducers/cardModReducer';
 
 const reducer = combineReducers({
   decks: deckReducer,
-  newCard: newCardReducer
+  newCard: newCardReducer,
+  cardMod: cardModReducer,
 });
 
 const store = createStore(
