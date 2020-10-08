@@ -20,7 +20,7 @@ async function updateCard(id, obj) {
   return res.data;
 }
 
-export default { 
+export default {
   getAll,
   createCard,
   removeCard,

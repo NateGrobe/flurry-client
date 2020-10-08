@@ -4,7 +4,12 @@ import Button from 'react-bootstrap/Button';
 import { connect } from 'react-redux';
 
 import { removeCardFromDeck, modCard } from '../reducers/deckReducer';
-import { initCardMod, modTitle, modDesc } from '../reducers/cardModReducer';
+import {
+  initCardMod,
+  modTitle,
+  modDesc ,
+  clearCardMod
+} from '../reducers/cardModReducer';
 
 const CardDisplayModal = (props) => {
   const [modifyTitle, setModifyTitle] = useState(false);
@@ -19,6 +24,7 @@ const CardDisplayModal = (props) => {
     hide();
     setModifyTitle(false);
     setModifyDesc(false);
+    props.clearCardMod();
   }
 
   function deleteCard() {
@@ -28,10 +34,10 @@ const CardDisplayModal = (props) => {
 
   function setInitialState() {
     props.initCardMod(
-        modifyTitle ? title : data.title,
-        modifyDesc ? description : data.description,
-        data.tasks
-      );
+      modifyTitle ? title : data.title,
+      modifyDesc ? description : data.description,
+      data.tasks
+    );
   }
 
   function enableDescMod() {
@@ -56,6 +62,7 @@ const CardDisplayModal = (props) => {
     setModifyTitle(false);
     setModifyDesc(false);
     hide();
+    props.clearCardMod();
   }
 
   return (
@@ -64,19 +71,20 @@ const CardDisplayModal = (props) => {
         <Modal.Header closeButton>
           <div onClick={enableTitleMod}>
             {modifyTitle
-              ? <input 
+              ? <input
                 value={title}
                 onChange={({ target }) => props.modTitle(target.value)}
               />
               : data.title}
-            </div>
+          </div>
         </Modal.Header>
         <Modal.Body>
           <div onClick={enableDescMod}>
-            {modifyDesc
-              ? <input
+            {modifyDesc || data.description === ''
+              ? <textarea
                 value={description}
                 onChange={({ target }) => props.modDesc(target.value)}
+                style={{ width: '80%', height: '5rem' }}
               />
               : data.description}
           </div>
@@ -99,14 +107,15 @@ const mapStateToProps = state => {
   return {
     cardMod: state.cardMod
   };
-}
+};
 
 const mapDispatchToProps = {
   removeCardFromDeck,
   initCardMod,
   modTitle,
   modDesc,
-  modCard
+  modCard,
+  clearCardMod
 };
 
 export default connect (
