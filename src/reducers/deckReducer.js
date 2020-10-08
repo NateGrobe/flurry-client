@@ -6,9 +6,9 @@ const deckReducer = (state = [], action) => {
     case 'INIT_DECKS':
       return action.content;
     case 'ADD_CARD_TO_DECK': {
-      const deckId = action.deckId;
+      const { deckId, newCard } = action;
       const changedDeck = state.find(d => d.id === deckId);
-      changedDeck.cards.push(action.newCard);
+      changedDeck.cards.push(newCard);
       return state.map(deck => deck.id ===  deckId ? changedDeck : deck);
     }
     case 'REMOVE_CARD_FROM_DECK': {
@@ -60,9 +60,9 @@ export function removeCardFromDeck(cardId, deckId) {
   };
 }
 
-export function modCard(changedCard, cardId, deckId) {
+export function modCard(card, cardId, deckId) {
   return async dispatch => {
-    // call api put statement
+    const changedCard = await cardServices.updateCard(cardId, card);
     dispatch({
       type: 'MOD_CARD',
       changedCard,

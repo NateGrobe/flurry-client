@@ -15,4 +15,14 @@ async function removeCard(cardId) {
   return await axios.delete(`${baseUrl}/${cardId}`);
 }
 
-export default { getAll, createCard, removeCard };
+async function updateCard(id, obj) {
+  const res = await axios.put(`${baseUrl}/${id}`, obj);
+  return res.data;
+}
+
+export default { 
+  getAll,
+  createCard,
+  removeCard,
+  updateCard,
+};
