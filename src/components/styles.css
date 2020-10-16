@@ -31,3 +31,17 @@
     border: none;
     float: right;
 }
+
+#navbar {
+    background-color: #0095ad;
+}
+
+#nav-username {
+    margin-right: 1rem;
+    color: #fff;
+}
+
+#signout-button {
+    background-color: #00afcb;
+    border: none;
+}

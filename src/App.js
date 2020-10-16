@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import Container from 'react-bootstrap/Container';
 import Decks from './components/Decks';
+import NavBar from './components/NavBar';
 
 import { initializeDecks } from './reducers/deckReducer';
 
@@ -12,9 +13,13 @@ const App = (props) => {
   }, []);
 
   return (
-    <Container fluid>
-      <Decks />
-    </Container>
+    <div>
+      <NavBar />
+      <br/>
+      <Container fluid>
+        <Decks />
+      </Container>
+    </div>
   );
 };
 
