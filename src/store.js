@@ -6,12 +6,14 @@ import deckReducer from './reducers/deckReducer';
 import newCardReducer from './reducers/newCardReducer';
 import cardModReducer from './reducers/cardModReducer';
 import newDeckReducer from './reducers/newDeckReducer';
+import loginReducer from './reducers/loginReducer';
 
 const reducer = combineReducers({
   decks: deckReducer,
   newCard: newCardReducer,
   cardMod: cardModReducer,
-  newDeck: newDeckReducer
+  newDeck: newDeckReducer,
+  login: loginReducer,
 });
 
 const store = createStore(
